@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Fira Sans", sans-serif;
+  overflow: hidden;
+}
+.radio {
+  /* height: 25vh; */
+}
+.radio-control__volume > span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.radio-control {
+  margin: 50px 20px;
+}
+.radio-display {
+  background-color: blue;
+  text-align: center;
+  padding: 30px 0;
+}
+.horizontal-slider {
+  height: 100%;
+}
+.save__presets button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.radio-control__buttons {
+  display: flex;
+  background-color: DodgerBlue;
+}
+.radio-control__buttons > div {
+  background-color: #f1f1f1;
+  margin: 10px;
+  padding: 20px;
+  font-size: 30px;
+}
+.radio-control__tune {
+  flex-grow: 1;
+}
+.radio-display__buttons svg {
+  font-size: 80px;
+  margin: 15px 20px;
+  cursor: pointer;
+}

@@ -1,11 +1,12 @@
-import React from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Knob } from "react-rotary-knob"
 import Slider from "@material-ui/core/Slider"
 
-export default function RadioControl(props) {
+export default function RadioControl({ globalState, changeVolume, changeStation }) {
   function valuetext(value) {
     return `${value} MHz`
   }
+
   return (
     <div className="radio-control">
       <h1>Radio Control</h1>
@@ -13,13 +14,26 @@ export default function RadioControl(props) {
         <div className="radio-control__volume">
           <h4>Volume</h4>
           <span>
-            <p>{parseFloat(props.globalState.volumeValue.toFixed(1))}</p>
-            <Knob min={0} max={10} step={1} onChange={props.onChange.bind(this)} value={props.globalState.volumeValue} />
+            {/* <p>{parseFloat(globalState.volumeValue.toFixed(0))}</p> */}
+            {<p>{Math.floor(globalState.volumeValue)}</p>}
+            <Knob min={0} max={1} step={1} onChange={changeVolume} value={globalState.volumeValue} />
           </span>
         </div>
         <div className="radio-control__tune">
           <h4>Tune Radio</h4>
-          <Slider defaultValue={87.9} getAriaValueText={valuetext} aria-labelledby="discrete-slider" valueLabelDisplay="auto" step={0.2} marks min={87.9} max={107.9} />
+          <Slider
+            onChangeCommitted={(e, val) => {
+              changeStation(val)
+            }}
+            defaultValue={87.9}
+            getAriaValueText={valuetext}
+            aria-labelledby="discrete-slider-small-steps"
+            valueLabelDisplay="auto"
+            step={0.2}
+            marks
+            min={87.9}
+            max={107.9}
+          />
         </div>
         <div className="save__presets">
           <h4>Save Channels</h4>

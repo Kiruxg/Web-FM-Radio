@@ -16,7 +16,7 @@ class App extends React.Component {
         { name: "control", id: 0 },
         { name: "display", id: 1 }
       ],
-      reSize: false,
+      resize: false,
       stationsFilter: {
         87.9: "hiphop",
         88.1: "classical",
@@ -132,7 +132,6 @@ class App extends React.Component {
       tag: this.state.stationsFilter[frequency],
       limit: 1
     })
-    console.log("in here", station)
     this.setState({ stationFreq: frequency, stationData: station })
   }
 
@@ -153,7 +152,6 @@ class App extends React.Component {
     }
   }
   onDragEnd = result => {
-    console.log(result)
     const { destination, source, draggableId } = result
     if (!destination) {
       return
@@ -166,28 +164,19 @@ class App extends React.Component {
     items.splice(result.destination.index, 0, reorderedItem)
 
     this.setState({ panelOrder: items }, () => console.log("Updated Panel Order:", this.state.panelOrder))
-    console.log("the result", items)
-  }
-  componentDidMount() {
-    // console.log("resize", window.addEventListener("resize"))
-    // this.resize()
   }
   componentWillUnmount(){
     window.removeEventListener("resize", this.resize.bind(this))
   }
-  // window.addEventListener("resize", () => return true)
   resize = () => {
-    if (window.innerWidth <= 1400) {
-      console.log('<1400')
-    }
-    this.setState({reSize: true})
+    this.setState({resize: true})
   }
   render() {
-    console.log(window.addEventListener("resize", this.resize))
+    window.addEventListener("resize", this.resize)
     return (
       <DragDropContext onDragEnd={this.onDragEnd}>
         <h1>Web FM Radio</h1>
-        <Droppable droppableId="dropArea" direction={this.state.reSize && window.innerWidth <= 1400 ? "vertical" : "horizontal"}>
+        <Droppable droppableId="dropArea" direction={this.state.resize && window.innerWidth <= 1400 ? "vertical" : "horizontal"}>
           {provided => (
             <div {...provided.droppableProps} ref={provided.innerRef} className="radio">
               {this.state.panelOrder[0].name === "control" ? (

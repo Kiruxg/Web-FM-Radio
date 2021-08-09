@@ -8,15 +8,18 @@ body {
   font-size: 62.5%;
   color: #fff;
   background: radial-gradient(circle, rgba(192, 192, 192, 1) 0%, rgba(97, 110, 161, 0.9673698738170347) 60%);
+  overflow-x: hidden;
+}
+h1 {
+  font-size: 3rem;
+  padding: 20px;
+  text-align: center;
 }
 .radio {
   display: flex;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   justify-content: center;
   margin: 50px 25px;
-}
-.radio-control {
-  flex-grow: 0.2;
 }
 .radio-control__volume > span {
   display: flex;
@@ -27,7 +30,7 @@ body {
 .radio-display {
   background-color: #15204a;
   text-align: center;
-  padding: 30px;
+  padding: 20px;
   flex-grow: 0.65;
   border-radius: 4px;
   font-size: 1.5rem;
@@ -58,13 +61,9 @@ body {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1.4rem;
   margin: 4px 2px;
   cursor: pointer;
-}
-.radio-control h1 {
-  font-size: 3rem;
-  padding: 20px;
 }
 .radio-control__buttons {
   display: flex;
@@ -101,6 +100,9 @@ body {
 
 @media screen and (max-width: 1400px) {
   /* Large Desktop */
+  .radio{
+    flex-wrap: wrap;
+  }
   .radio-control__buttons{
     display: flex;
   }
@@ -119,11 +121,11 @@ body {
 }
 @media screen and (max-width: 480px) {
   /* mobile */
+  h1 {
+    font-size: 2.5rem;
+  }
   .radio {
     margin: 14px 7px;
-  }
-  .radio-control h1 {
-    font-size: 1.8rem;
   }
   .radio-control {
     flex-grow: 1;
@@ -131,10 +133,14 @@ body {
   .radio-control__buttons > div {
     font-size: 1.5rem;
   }
+  .save__presets button{
+    font-size: 1.2rem;
+  }
   .radio-display {
     padding: 20px;
     font-size: 1rem;
   }
+  
   .rhap_main-controls {
     margin: 0;
   }

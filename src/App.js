@@ -3,6 +3,7 @@ import RadioControl from "./radio_control"
 import RadioDisplay from "./radio_display"
 import "./app.css"
 import { RadioBrowserApi } from "radio-browser-api"
+import { DragDropContext, Droppable} from "react-beautiful-dnd"
 
 class App extends React.Component {
   constructor() {
@@ -11,6 +12,10 @@ class App extends React.Component {
       volumeValue: 10.0,
       stationFreq: "87.9",
       savePreset: ["Ch1", "Ch2", "Ch3", "Ch4", "Ch5", "Ch6"],
+      panelOrder: [
+        { name: "control", id: 0 },
+        { name: "display", id: 1 }
+      ],
       stationsFilter: {
         87.9: "hiphop",
         88.1: "classical",
@@ -146,12 +151,46 @@ class App extends React.Component {
       this.setState({ stationData: JSON.parse(localStorage.getItem(localStorage.key(index))), stationFreq: localStorage.key(index) })
     }
   }
+  onDragEnd = result => {
+    console.log(result)
+    const { destination, source, draggableId } = result
+    if (!destination) {
+      return
+    }
+    if (destination.droppableId === source.droppableId && destination.index === source.index) {
+      return
+    }
+    const items = Array.from(this.state.panelOrder)
+    const [reorderedItem] = items.splice(result.source.index, 1)
+    items.splice(result.destination.index, 0, reorderedItem)
+
+    this.setState({ panelOrder: items }, () => console.log("Updated Panel Order:", this.state.panelOrder))
+    console.log("the result", items)
+  }
   render() {
     return (
-      <div className="radio">
-        <RadioControl globalState={this.state} changeVolume={this.changeVolume} tuneStation={this.tuneStation} saveStation={this.saveStation} />
-        <RadioDisplay volumeValue={this.state.volumeValue} stationFreq={this.state.stationFreq} stationData={this.state.stationData} />
-      </div>
+      <DragDropContext onDragEnd={this.onDragEnd}>
+        <h1>Web FM Radio</h1>
+        <Droppable droppableId="dropArea" direction="horizontal">
+          {provided => (
+            <div {...provided.droppableProps} ref={provided.innerRef} className="radio">
+              {this.state.panelOrder[0].name === "control" ? (
+                <>
+                  <RadioControl globalState={this.state} changeVolume={this.changeVolume} tuneStation={this.tuneStation} saveStation={this.saveStation} />
+                  <RadioDisplay volumeValue={this.state.volumeValue} stationFreq={this.state.stationFreq} stationData={this.state.stationData} />
+                </>
+              ) : (
+                <>
+                  <RadioDisplay volumeValue={this.state.volumeValue} stationFreq={this.state.stationFreq} stationData={this.state.stationData} />
+                  <RadioControl globalState={this.state} changeVolume={this.changeVolume} tuneStation={this.tuneStation} saveStation={this.saveStation} />
+                </>
+              )}
+
+              {provided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </DragDropContext>
     )
   }
 }

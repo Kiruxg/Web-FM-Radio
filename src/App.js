@@ -163,13 +163,13 @@ class App extends React.Component {
     const [reorderedItem] = items.splice(result.source.index, 1)
     items.splice(result.destination.index, 0, reorderedItem)
 
-    this.setState({ panelOrder: items }, () => console.log("Updated Panel Order:", this.state.panelOrder))
+    this.setState({ panelOrder: items })
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
     window.removeEventListener("resize", this.resize.bind(this))
   }
   resize = () => {
-    this.setState({resize: true})
+    this.setState({ resize: true })
   }
   render() {
     window.addEventListener("resize", this.resize)

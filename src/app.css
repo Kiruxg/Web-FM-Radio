@@ -118,6 +118,9 @@ h1 {
   .radio-display{
     min-width: 100%;
   }
+  .radio-display img {
+    max-width: 60%;
+  }
 }
 @media screen and (max-width: 480px) {
   /* mobile */

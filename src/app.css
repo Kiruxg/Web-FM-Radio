@@ -1,15 +1,23 @@
+/* @font-face {
+  font-family: "RadioRanchNF";
+  src: url("../font/RadioRanchNF.ttf");
+} */
+/* @require()
+@import url("../font/RadioRanchNF.ttf"); */
 * {
   box-sizing: border-box;
 }
 body {
   margin: 0;
   padding: 0;
-  font-family: "Fira Sans", sans-serif;
+  font-family: "Palette Mosaic", cursive;
   overflow: hidden;
-  background: #f6f8f9;
+  color: #fff;
+  background: radial-gradient(circle, rgba(192, 192, 192, 1) 0%, rgba(97, 110, 161, 0.9673698738170347) 60%);
 }
 .radio {
   display: flex;
+  margin: 50px 25px;
 }
 .radio-control__volume > span {
   display: flex;
@@ -17,23 +25,35 @@ body {
   align-items: center;
   justify-content: space-between;
 }
-
-.radio-control {
-  margin: 50px 20px;
-}
 .radio-display {
+  background-color: #15204a;
   text-align: center;
-  padding: 30px 0;
+  padding: 30px;
   flex-grow: 1;
+  border-radius: 4px;
+}
+@keyframes App-logo-spin {
+  /* from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  } */
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.radio-display img {
+  border-radius: 50%;
 }
 .horizontal-slider {
   height: 100%;
 }
 .save__presets button {
-  background-color: #4caf50;
+  background-color: #4c9f70;
   border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 15px 30px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -41,15 +61,21 @@ body {
   margin: 4px 2px;
   cursor: pointer;
 }
+.radio-control h1 {
+  font-size: 3rem;
+  padding: 20px;
+  background-color: #15204a;
+  width: 68%;
+}
 .radio-control__buttons {
   display: flex;
-  background-color: #292929;
 }
 .radio-control__buttons > div {
-  background-color: #f1f1f1;
-  margin: 10px;
+  background-color: #15204a;
+  margin: 5px 10px;
   padding: 20px;
   font-size: 30px;
+  border-radius: 4px;
 }
 .radio-control__tune {
   flex-grow: 1;
@@ -62,14 +88,30 @@ body {
   margin: 15px 20px;
   cursor: pointer;
 }
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+
+.rhap_main-controls {
+  margin: 25px 0;
+}
+.rhap_controls-section button {
+  background: #15204a;
+  border: none;
+  color: #fff;
+}
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 780px) {
+  /* tablet */
+  div {
+    background-color: green;
   }
 }
-.rhap_main-controls {
-  margin-bottom: 25px;
+
+@media screen and (max-width: 1020px) {
+  /* Large Desktop */
+}
+@media screen and (max-width: 780px) {
+  /* tablet */
+}
+@media screen and (max-width: 480px) {
+  /* mobile */
 }

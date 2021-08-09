@@ -9,7 +9,7 @@ class App extends React.Component {
     super()
     this.state = {
       volumeValue: 10.0,
-      station: "87.9",
+      stationFreq: "87.9",
       savePreset: ["Ch1", "Ch2", "Ch3", "Ch4", "Ch5", "Ch6"],
       stationsFilter: {
         87.9: "hiphop",
@@ -47,6 +47,7 @@ class App extends React.Component {
         94.3: "feiern",
         94.5: "community",
         94.7: "synth",
+        94.9: "arabic",
         95.1: "partyhits",
         95.3: "party",
         95.5: "hot hits",
@@ -113,10 +114,10 @@ class App extends React.Component {
         107.9: "relax"
       }
     }
-    this.tuneStation(this.state.station)
-    document.cookie = "cookie1=value1; samesite=none; Secure"
+    this.tuneStation(this.state.stationFreq)
+    // document.cookie = "cookie1=value1; samesite=none; Secure"
   }
- 
+
   tuneStation = async frequency => {
     const api = new RadioBrowserApi(fetch.bind(window, "FM Radio Player"))
 
@@ -125,32 +126,31 @@ class App extends React.Component {
       tag: this.state.stationsFilter[frequency],
       limit: 1
     })
-
-    this.setState({ stationData: station, station: frequency })
+    console.log("in here", station)
+    this.setState({ stationFreq: frequency, stationData: station })
   }
 
   changeVolume = val => {
     if (this.state.stationData) {
-      this.setState({ volumeValue: val }, () => console.log("volume set inside:", this.state.volumeValue))
+      this.setState({ volumeValue: val })
     }
   }
   saveStation = (frequency, stationData, index) => {
     //get the freq
-    console.log("save called")
     if (!localStorage.key(index)) {
       //does not exist
       localStorage.setItem(frequency, JSON.stringify(stationData))
-      this.setState({ station: frequency })
+      this.setState({ stationFreq: frequency })
     } else {
       //retrieve
-      this.setState({ stationData: JSON.parse(localStorage.getItem(localStorage.key(index))), station: localStorage.key(index) })
+      this.setState({ stationData: JSON.parse(localStorage.getItem(localStorage.key(index))), stationFreq: localStorage.key(index) })
     }
   }
   render() {
     return (
       <div className="radio">
         <RadioControl globalState={this.state} changeVolume={this.changeVolume} tuneStation={this.tuneStation} saveStation={this.saveStation} />
-        <RadioDisplay volume={this.state.volumeValue} stationFreq={this.state.station} stationData={this.state.stationData} />
+        <RadioDisplay volumeValue={this.state.volumeValue} stationFreq={this.state.stationFreq} stationData={this.state.stationData} />
       </div>
     )
   }

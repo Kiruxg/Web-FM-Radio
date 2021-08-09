@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Knob } from "react-rotary-knob"
 import Slider from "@material-ui/core/Slider"
 
@@ -37,9 +37,8 @@ export default function RadioControl({ globalState, changeVolume, tuneStation, s
         <div className="save__presets">
           <h4>Save Station</h4>
           {globalState.savePreset.map((channel, index) => {
-
             return (
-              <button className={`${channel}__preset`} key={index} onClick={() => saveStation(globalState.station, globalState.stationData, index)}>
+              <button className={`${channel}__preset`} key={index} onClick={() => saveStation(globalState.stationFreq, globalState.stationData, index)}>
                 {localStorage.key(index) || channel}
               </button>
             )

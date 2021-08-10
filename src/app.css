@@ -45,7 +45,7 @@ h1 {
 }
 .radio-display img {
   border-radius: 50%;
-  max-width: 90%;
+  width: 30%;
 }
 .radio--playing {
   animation: 4s App-logo-spin linear infinite;
@@ -119,7 +119,7 @@ h1 {
     min-width: 100%;
   }
   .radio-display img {
-    max-width: 60%;
+    width: 60%;
   }
 }
 @media screen and (max-width: 480px) {
@@ -137,7 +137,7 @@ h1 {
     font-size: 1.5rem;
   }
   .save__presets button{
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   .radio-display {
     padding: 20px;

@@ -62,6 +62,7 @@ class App extends React.Component {
         96.1: "klassik",
         96.3: "greek",
         96.5: "english",
+        96.7: "richmond",
         96.9: "dubstep",
         97.1: "reggae",
         97.3: "soul",
@@ -126,12 +127,17 @@ class App extends React.Component {
 
   tuneStation = async frequency => {
     const api = new RadioBrowserApi(fetch.bind(window, "FM Radio Player"))
-
+    console.log("what is api:", api)
     const station = await api.searchStations({
       language: "english",
       tag: this.state.stationsFilter[frequency],
       limit: 1
     })
+    // station.map(station => {
+    //   console.log("what is station:", station.tags)
+
+    // })
+
     this.setState({ stationFreq: frequency, stationData: station })
   }
 
